@@ -1,0 +1,22 @@
+@mixin bg-image($url) {
+  background-image: url($url + '@2x.png');
+  @media (-webkit-min-device-pixel-ratic: 3) and (min-device-pixel-ratic: 3){
+    background-image: url($url + '@3x.png');
+  };  
+}
+
+@mixin dpr2x() {
+  html[data-dpr='2'] & {
+    @content;
+  }
+}
+
+@mixin dpr3x() {
+  html[data-dpr='3'] & {
+    @content;
+  }
+}
+
+@function lintHeightOffset($fontSize, $lineHeight) {
+  @return $fontSize * ($lineHeight - 1) / 2;
+}

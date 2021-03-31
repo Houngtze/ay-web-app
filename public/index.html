@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>页面加载中...</title>
+</head>
+<body>
+  <script>
+    !(function(c,b,d,a){
+      if (location.host.indexOf('dafysz') > -1 || location.host.indexOf('szqk-tech') > -1) {
+        c[a]||(c[a]={});c[a].config={pid:"erqqrpzrri@cb624420b701e36",appType:"web",imgUrl:"https://arms-retcode.aliyuncs.com/r.png?"};
+        with(b)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("crossorigin","",src=d)
+      }
+    })(window,document,"https://retcode.alicdn.com/retcode/bl.js","__bl");
+    // 页面 load 后调用 SDK 方法
+    if (location.host.indexOf('dafysz') > -1) {
+      window.addEventListener('load', function (e) {
+        // 调用 setConfig 方法修改 SDK 配置项
+        __bl.setConfig({
+          ignore: {
+            ignoreApis: [
+              /^growingio/,
+              function (str) { // 忽略方法
+                if (str && str.indexOf('growingio') >= 0) return true;
+                return false;
+              }]
+          },
+          ignore: {
+            ignoreErrors: /^Script error\.?$/
+          },
+          enableSPA: true
+        });
+      });
+    }
+  </script>
+  <div id="app"></div>
+  <script type="application/javascript">
+    (function(){
+      if (!HTMLCanvasElement.prototype.toBlob) {
+        Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
+          value: function (callback, type, quality) {
+            var binStr = atob( this.toDataURL(type, quality).split(',')[1] ),
+                len = binStr.length,
+                arr = new Uint8Array(len);
+            for (var i=0; i<len; i++ ) {
+              arr[i] = binStr.charCodeAt(i);
+            }
+            callback( new Blob( [arr], {type: type || 'image/png'} ) );
+          }
+        });
+      }
+    })();
+    //  vConsole 调试工具
+    (function() {
+      var src = '//cdn.bootcdn.net/ajax/libs/vConsole/3.3.4/vconsole.min.js';
+      if (location.host.indexOf('dafysz') > -1 || location.host.indexOf('szqk-tech') > -1 ) return;
+      document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+      document.write('<scr' + 'ipt>var vConsole = new VConsole();</scr' + 'ipt>');
+    })();
+    // eruda 调试工具
+    (function() {
+      var src = '//cdn.jsdelivr.net/npm/eruda';
+      if ((location.host.includes('dafysz') || location.host.includes('szqk-tech') ) && !/debug=1/.test(window.location) && sessionStorage.getItem('qk-eruda-debug') != '1') return;
+      document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+      document.write('<scr' + 'ipt>eruda.init();</scr' + 'ipt>');
+    })();
+    (function () {
+      if (location.host.indexOf('dafysz') > -1 || location.host.indexOf('szqk-tech') > -1){
+        !function(f,c,h,d,b){f[b]=f[b]||function(){(f[b].q=f[b].q||[]).push(arguments)},h=c.createElement("script");var a=c.getElementsByTagName("script")[0];h.async=1,h.src=("https:"==document.location.protocol?"https://":"http://")+d,a.parentNode.insertBefore(h,a)}(window,document,"script","assets.growingio.com/2.1/gio.js","gio");
+        let code =  '80573adb4933fb34'
+        if (location.host.indexOf('jxh') > -1) code = "b8a8c74bd980cadc"
+        gio('init', code, {});
+        gio('config', {'hashtag': true});
+        gio('send');
+      }
+    })();
+  </script>
+  <script type="text/javascript" src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js" defer></script>
+</body>
+</html>

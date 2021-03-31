@@ -1,0 +1,156 @@
+{
+  "vip": [
+    {
+      "title": {
+        "tabTitle": "推荐产品"
+      },
+      "list": [
+	   {
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/11/04/202011041524041544.jpg",
+          "title": "随心借",
+          "text": "会员专享极速放款通道",
+          "desc": "首借额度高，小山秒提额",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.1",
+          "url": "http://doudouqianbao.com/h5?code=aysc"
+        },
+	    {
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/28/202010280944410914.jpg",
+          "title": "大金贷",
+          "text": "会员专享大额放款通道",
+          "desc": "一对一客户经理服务 最高30万额度",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.2",
+          "url": "http://aiyong.szqk-tech.com/custom-page/jyc-xjd/#/dajin-loan"
+        },
+        {
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/09/202010091551451883.jpg",
+          "title": "分期易",
+          "text": "会员专享大额放款通道",
+          "desc": "最高15000额度 最快1分钟放款",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.3",
+          "url": "https://fenqiyi.ztch.ltd/land-wx/#/registerPage?code=ZCY00002&hfrom=aysc00102001"
+        },
+	    {
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/11/19/202011191022352002.jpg",
+          "title": "借钱帮手",
+          "text": "会员专享极速放款通道",
+          "desc": "最高5万额度 最快10分钟到账",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.4",
+          "url": "https://sahuahua.cn/5f9t"
+        },
+	    {
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/11/19/202011191022233857.jpg",
+          "title": "米粒信用",
+          "text": "会员专享大额放款通道",
+          "desc": "最高20万额度 最快3分钟下款",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.5",
+          "url": "https://y131419.com/8rnj "
+        },
+		{
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/11/11/202011111346568925.jpg",
+          "title": "蜜蜂金融",
+          "text": "会员专享极速放款通道",
+          "desc": "简单快速，线上全流程申请",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.6",
+          "url": "https://vip.xiaomifenga.com/h5/#/?code=e4dbc79a3b6aad9cc2f1b96a36ca7d876c862a85d69f5a47"
+        },
+        {
+          "icon": "https://land.huohuod.com/land/uni/fenqi/25448?td_channelid=20176&v",
+          "title": "乐享借",
+          "text": "会员享iPhone 11抽奖机会",
+          "desc": "简单 快速 借的到 安全可靠",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.7",
+          "url": "https://land.huohuod.com/land/uni/fenqi/25448?td_channelid=20176&v"
+        },
+		{
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/30/202010301751422286.jpg",
+          "title": "利美分期",
+          "text": "会员专享大额放款通道",
+          "desc": "大额低息，分期灵活，用钱循环借",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.8",
+          "url": "https://ai-fenqi.com/?m=11502"
+        },
+		{
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/09/28/202009281422259427.jpg",
+          "title": "桔多多",
+          "text": "会员享最高免息1231元",
+          "desc": "新人三重礼 被拒还送礼",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.9",
+          "url": "https://mall.juzifenqi.com/channel_register/register_loan/index-v2.html?channel=emma01aiyong"
+        }
+      ]
+    },
+    {
+      "title": {
+        "tabTitle": "大额优先"
+      },
+      "list": [
+        {
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/28/202010280944410914.jpg",
+          "title": "大金贷",
+          "text": "会员专享大额放款通道",
+          "desc": "一对一客户经理服务 最高30万额度",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.1",
+          "url": "http://aiyong.szqk-tech.com/custom-page/jyc-xjd/#/dajin-loan"
+        },
+		{
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/30/202010301751422286.jpg",
+          "title": "利美分期",
+          "text": "会员专享大额放款通道",
+          "desc": "大额低息，分期灵活，用钱循环借",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.2",
+          "url": "https://ai-fenqi.com/?m=11502"
+        },
+		 {
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/09/202010091551451883.jpg",
+          "title": "分期易",
+          "text": "会员专享大额放款通道",
+          "desc": "最高15000额度 最快1分钟放款",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.3",
+          "url": "https://fenqiyi.ztch.ltd/land-wx/#/registerPage?code=ZCY00002&hfrom=aysc00102001"
+        },
+		{
+          "icon": "https://oss-prod-fastdfs.szqk-tech.com/2020/11/19/202011191022233857.jpg",
+          "title": "米粒信用",
+          "text": "会员专享大额放款通道",
+          "desc": "最高20万额度 最快3分钟下款",
+          "btnText": "立即申请",
+          "label": "合作渠道 No.4",
+          "url": "https://y131419.com/8rnj "
+        }
+      ]
+    }
+  ],
+  "credit": {
+    "title": {
+      "text": "信用提升通道"
+    },
+    "list": [
+      {
+        "icon": "http://static.ali.szqk-tech.com/images/custom-page/jyc-xjd/org-loan-icon-bx.png",
+        "title": "领取出行意外险",
+        "desc": "领取成功有助于提升信用值",
+        "btnText": "去领取",
+        "url": "http://aiyong.szqk-tech.com/sale-m/18090500-zq.html#/insurance"
+      },
+      {
+        "icon": "http://static.ali.szqk-tech.com/images/custom-page/jyc-xjd/org-loan-icon-xy.png",
+        "title": "领取个人信用报告",
+        "text": "领取成功有助于提升信用值",
+        "btnText": "去领取",
+        "url": "https://m.tianxiaxinyong.cn/cooperation/crp-v2/index.html?channel=WVdVZ0VMRDdnWlpOUHdzZlhBU3NOQT09 "
+      }
+    ]
+  }
+}

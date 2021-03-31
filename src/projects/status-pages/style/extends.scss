@@ -1,0 +1,46 @@
+%btn-bg{
+  color: $color-white;
+  background: linear-gradient(to right, #e0bb75, #d19f55);
+  &:active{
+    background: linear-gradient(to right, #bf9f64, #b18647);
+  }
+}
+%form {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  ul{
+    background-color: $bg-color-white;
+    li{
+      display: flex;
+      box-sizing: border-box;
+      height: 1.1rem;
+      width: calc(100% - 0.3rem);
+      margin-left: 0.3rem;
+      padding-right: 0.3rem;
+      align-items: center;
+      font-size: 0.3rem;
+      color: $color-main;
+      border-bottom: 0.01rem solid $bd-color-main;
+      &:last-child{
+        border-bottom: none;
+      }
+      label{
+        width: 1.68rem;
+        flex-shrink: 0;
+        text-align: left;
+      }
+      input{
+        width: 100%;
+        border: none;
+        // caret-color:$color-gold;
+        &::-webkit-input-placeholder{
+          color: $color-gray;
+        }
+        &:disabled{
+          background: none;
+        }
+      }
+    }
+  }
+}

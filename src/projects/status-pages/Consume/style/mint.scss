@@ -1,0 +1,41 @@
+$color-main: #363636;
+$color-orange: #fb9030;
+$color-gray: #a8a8a8;
+$color-white: #ffffff;
+
+$bg-color-main: #f2f2f2;
+$bg-color-white: #ffffff;
+$bg-color-orange: #fb9030;
+
+$bd-color-main: #e5e5e5;
+
+.mint-msgbox{
+  width: 5.4rem !important;
+  // height: 2.6rem;
+  border-radius: 0.26rem !important;
+  .mint-msgbox-content{
+    display: flex;
+    // height: 1.74rem;
+    // padding: 0 1rem;
+    justify-content: center;
+    align-items: center;
+    border-bottom-color: $bd-color-main;
+    .mint-msgbox-message{
+      font-size: 0.34rem;
+      color: $color-main;
+      line-height: 24px;
+    }
+  }
+  .mint-msgbox-btns{
+    height: 0.88rem;
+    font-size: 0.34rem;
+    .mint-msgbox-cancel{
+      color: $color-main;
+      border-right-color: $bd-color-main;
+    }
+    .mint-msgbox-confirm{
+      color: $color-orange;
+    }
+  }
+}
+

@@ -1,0 +1,230 @@
+<template>
+  <div class="economizer-result">
+    <div class="result-header">
+      <p class="result-info">中奖名单公布</p>
+      <p class="regret-info">{{winningStatus==1?'恭喜您已中奖':'恭喜您已中二等奖,在APP-我的-优惠券查看使用'}}</p>
+      <div class="win-info" v-for="item in winningList" :key="item.activityThemeId">
+        <img :src="item.imgUrl2" alt="">
+        <div class="win-content">
+          <p>{{item.goodName}}</p>
+          <p>中奖者：{{item.userName}}</p>
+          <p>中奖编码：{{item.joinCode}}</p>
+        </div>
+      </div>
+      <div class="again-btn" @click="goPayAgin">我不服，再来一次</div>
+    </div>
+    <div class="result-bottom">
+      <!-- <div class="bottom-header">以下场次在近 2 小时出现中奖者，马上去碰运气</div> -->
+      <div class="bottom-header">参与3次以上获奖概率在 99%以上</div>
+      <ul class="bottom-list">
+        <li class="list-tips" v-for="item in listData">
+          <div class="tips-content">
+            <img :src="item.imgUrl2" alt="">
+            <div class="content-title">
+              <p>{{item.goodName}}</p>
+              <p>{{item.virtualJoinedNum}}/{{item.fullNum}}人正在参与，就差你了</p>
+              <div class="tips-bottom">
+                <span>￥{{item.activityPrice}}</span>
+                <span @click="goBuy(item.activityThemeId)">立即抢购</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+<script>
+  import env from '@/helpers/env';
+  import {mapState, mapActions} from "vuex";
+
+  export default {
+    data() {
+      return {
+        winningList: [],
+        winningStatus: '',
+        listData: ''
+      };
+    },
+    filters: {},
+    computed: {
+      ...mapState({
+        isSign: state => state.global.userInfo.isSign,
+        userId: state => state.global.userInfo.userId,
+        ucAccountId: state => state.global.userInfo.ucAccountId,
+        idPerson: state => state.global.userInfo.idPerson,
+        identity: state => state.global.userInfo.identity,
+        mobile: state => state.global.userInfo.mobile,
+        name: state => state.global.userInfo.name,
+        // listData: state => state.activityList.activityList,
+      })
+    },
+    created() {
+      this.getData();
+    },
+    mounted() {
+    },
+    methods: {
+      ...mapActions("global/sign", ["initSignStatus"]),
+      goPayAgin() {
+        this.$router.push("/home");
+      },
+      goBuy(id) {
+        this.$router.push({path: "/detail", query: {acId: id}});
+      },
+      async getData() {
+        // const res = await this.$api.getLotteryResult({userId: 1510, activityOrderId: 1, activityThemeId: 1, goodId: 1});
+        const res = await this.$api.getLotteryResult({
+          userId: this.userId,
+          activityOrderId: this.$route.query.orderid,
+          activityThemeId: this.$route.query.themeid,
+          goodId: this.$route.query.goodid
+        });
+        if (res.code === '0') {
+          this.winningList = res.data.openResultList;
+          this.winningStatus = res.data.resultStatus;
+        }
+        const listRes = await this.$api.getActivityList({});
+        if (listRes.code === '0') {
+          this.listData = listRes.data;
+        }
+      }
+    }
+  };
+</script>
+<style lang="scss" scoped>
+  @import "src/style/index.scss";
+</style>
+<style lang="scss">
+  .economizer-result {
+    .result-header {
+      background-color: #fff;
+      padding: .5rem .3rem .3rem;
+      margin-bottom: .2rem;
+      .result-info {
+        font-size: .48rem;
+        text-align: center;
+      }
+      .regret-info {
+        color: #A8A8A8;
+        font-size: .28rem;
+        text-align: center;
+        margin-bottom: .4rem;
+      }
+      .win-info {
+        display: flex;
+        justify-content: flex-start;
+        border-radius: .3rem;
+        border: .01rem solid #f6f6f6;
+        box-shadow: 15px 5px 15px -10px #f6f6f6, -15px 5px 15px -10px #f6f6f6, 0px 15px 15px -10px #f6f6f6;
+        margin-bottom: .6rem;
+        padding: .3rem;
+        img {
+          display: inline-block;
+          width: 2rem;
+          height: 2rem;
+          margin-right: .2rem;
+        }
+        .win-content {
+          padding: .1rem 0;
+          p {
+            &:nth-child(1) {
+              color: #363636;
+              font-size: .3rem;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              overflow: hidden;
+            }
+            &:nth-child(2) {
+              color: #A8A8A8;
+              font-size: .24rem;
+              margin: .1rem 0 .6rem;
+            }
+            &:nth-child(3) {
+              color: #FF4949;
+              font-size: .24rem;
+            }
+          }
+        }
+      }
+      .again-btn {
+        border-radius: .1rem;
+        color: #fff;
+        text-align: center;
+        background-color: #FF2929;
+        padding: .3rem 0;
+      }
+    }
+    .result-bottom {
+      background-color: #fff;
+      .bottom-header {
+        padding: .3rem;
+        border-bottom: .02rem solid #E5E5E5;
+      }
+      .bottom-list {
+        padding: 0 .3rem;
+        li + li {
+          border-top: .02rem solid #E5E5E5;
+        }
+        .list-tips {
+          padding: .3rem 0;
+          .order-status {
+            text-align: right;
+            font-size: .22rem;
+            color: #FF4949;
+          }
+          .tips-content {
+            display: flex;
+            justify-content: flex-start;
+            img {
+              display: inline-block;
+              width: 2rem;
+              height: 2rem;
+              margin-right: .2rem;
+            }
+            .content-title {
+              width: 100%;
+            }
+            p {
+              &:nth-child(1) {
+                color: #363636;
+                font-size: .3rem;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+                min-height: .95rem;
+              }
+              &:nth-child(2) {
+                color: #A8A8A8;
+                font-size: .24rem;
+                margin-bottom: .3rem;
+              }
+            }
+            .tips-bottom {
+              display: flex;
+              justify-content: space-between;
+              align-items: baseline;
+              span {
+                &:nth-child(1) {
+                  color: #FF4949;
+                  font-size: .36rem;
+                }
+                &:nth-child(2) {
+                  font-size: .2rem;
+                  display: inline-block;
+                  color: #fff;
+                  background-color: #FF4949;
+                  border-radius: .3rem;
+                  padding: .16rem .32rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
+

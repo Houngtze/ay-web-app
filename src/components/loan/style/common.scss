@@ -1,0 +1,152 @@
+@import '../../../style/mixin.scss';
+.page-bottom-btn {
+  margin-top: .9rem;
+  padding: 0 .3rem;
+  text-align: center;
+  & button {
+    -webkit-appearance: none;
+    border: none;
+    color: #fff;
+    font-size: .36rem;
+    padding: .3rem 0;
+    width: 100%;
+    background: linear-gradient(270deg, rgba(208, 158, 84, 1) 0%, rgba(225, 188, 120, 1) 100%);
+    border-radius: .1rem;
+  }
+}
+
+.data-block{
+  & .data-block-content{
+    width: 100%;
+    background-color: #fff;
+    &.list{
+      & > ul > li{
+        width: 100%;
+        height: .9rem;
+        padding: .3rem;
+        line-height: .9rem;
+        display: flex;
+        align-items: center;
+        align-content: space-between;
+        justify-content: center;
+        & p{
+          flex: 1;
+          font-size: .3rem;
+          color: #363636;
+          line-height: 1;
+          display: flex;
+          align-items: center;
+          justify-content: left;
+          & label{
+            line-height: 1;
+            padding: 0.05rem .1rem;
+            font-size: .2rem;
+            color: #fff;
+            background-color: #FF3F3F;
+            border-radius: .16rem;
+            margin-left: .15rem;
+          }
+        }
+        & .item-btn{
+          width: .4rem;
+          height: .4rem;
+          @include bg-image('../images/icon-list-btn');
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+    &.gird{
+      padding: .3rem .3rem 0 .3rem;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: space-between;
+      & .item{
+        width: 3.28rem;
+        height:1.4rem;
+        margin-bottom: .3rem;
+        padding: .3rem;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        box-shadow:0 0.02rem 0.1rem 0 rgba(153,153,153,0.2);
+        border-radius: .1rem;
+        &:nth-child(2n-1){
+          margin-right: .3rem;
+        }
+        & img{
+          width: .8rem;
+          height: .8rem;
+        }
+        & p{
+          font-size: .3rem;
+          color: #363636;
+          padding-left: .2rem;
+        }
+      }
+    }
+  }
+}
+
+.agree-check {
+  text-align: center;
+  color: #a8a8a8;
+  font-size: .2rem;
+  margin: 0.15rem 0;
+  padding: 0 .3rem;
+}
+
+.agree-check input[type="checkbox"] {
+  visibility: hidden;
+  position: absolute;
+  z-index: 100000;
+  touch-action: none;
+}
+
+.agree-check input[type="checkbox"]:checked + i, .agree-check label i {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  line-height: 15px;
+  color: #fff;
+  vertical-align: middle;
+  margin: -2px 5px 1px 0px;
+  border: 0;
+  touch-action: none;
+}
+
+.agree-check {
+  color: #363636;
+  text-align: center;
+  p {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  span {
+    font-size: .2rem;
+  }
+  span a {
+    color: #fff;
+  }
+  & span label {
+    color: #fb9030;
+    & span {
+      color: #363636;
+    }
+  }
+}
+
+.agree-check input[type="checkbox"] + i {
+  background: url("../images/checkbox.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.agree-check input[type="checkbox"]:checked + i {
+  background: url("../images/checked.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}

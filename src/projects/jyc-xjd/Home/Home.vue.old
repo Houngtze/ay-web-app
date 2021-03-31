@@ -1,0 +1,291 @@
+<template>
+<div class="jyc-xjd">
+  <p class="header" v-if="topStutce">
+    <span class="link" v-if="pageData.newestLoanOrder.orderStatus === '7'" @click="goToPay(pageData.newestLoanOrder.mallOrderId)">立即支付>></span>
+    <span class="link" v-if="pageData.newestLoanOrder.orderStatus === '1'" @click="goLoanPage(pageData.newestLoanOrder.mallOrderId, pageData.newestLoanOrder.id)">立即提现>></span>
+    {{topStr}}
+  </p>
+  <div class="content-main">
+    <p class="p1">额度已激活</p>
+    <p class="p2">当前最高可借(元)</p>
+    <p class="p3">{{ultimaEncash}}</p>
+    <p class="p4">总额度{{productEncash}}元，日利率低至万5</p>
+    <p class="bnt1" @click="goToLoan">去借钱</p>
+    <p class="bnt2" @click="goLink('/my-loan')">我的借钱</p>
+  </div>
+  <footer-link></footer-link>
+</div>
+</template>
+<script>
+import {mapState, mapActions} from 'vuex';
+import {Toast} from 'mint-ui';
+import {redirectToLoginPage} from '@/helpers/utils';
+import FooterLink from './../components/Footer'
+export default {
+  components: {
+    FooterLink
+  },
+  data(){
+    return{
+      tabHover:true,
+      productEncash:0,
+      canClick: false,
+      ultimaEncash:0,
+      topStr:'',
+      topStutce:false,
+      pageData:{},
+    }
+  },
+  beforeMount(){
+  },
+  watch:{
+  },
+  computed:{
+    ...mapState({
+      userId: state => state.global.userInfo.userId,
+      personId: state => state.global.userInfo.idPerson,
+      ucAccountId: state => state.global.userInfo.ucAccountId,
+      clientCode: state => state.global.clientCode,
+    }),
+  },
+  created() {
+    this.getPageData();
+  },
+  mounted(){
+  },
+  methods:{
+    ...mapActions('base', [
+      'set_txUsableLimit'
+    ]),
+    goToPay(orderNo){
+      // 去支付页
+      this.goLink({
+        path:'./result-pay',
+        query:{
+          lno:orderNo
+        }
+      });
+    },
+    goLoanPage(orderNo, id){
+      // 去下款页
+      this.goLink({
+        path:'./result-loan',
+        query:{
+          mallOrderId:orderNo,
+          loanOrderId:id
+        }
+      });
+    },
+    async getPageData(){
+      // 获取额度状态
+      const openParams = {
+        userId: this.userId,
+        personId: this.personId,
+        type: 'XJD_TX'
+      }
+      const openRes = await this.$api.admissionHttp(openParams);
+      if(openRes.code === 'sc0'){
+        this.productEncash = openRes.data.productEncash; // 总额度
+        this.ultimaEncash = openRes.data.ultimaEncash; // 可提现额度
+        this.set_txUsableLimit(this.ultimaEncash);
+        this.canClick = true;
+        this.pageData = openRes.data;
+        if(!openRes.data.newestLoanOrder || !openRes.data.newestLoanOrder.mallOrderId){
+          this.topStutce = true;
+          this.topStr = '根据您最近的信用评分，现已为您开通爱满分提现功能';
+        }
+        else{
+          if(openRes.data.newestLoanOrder.orderStatus === '7'){
+            // 待支付
+            this.topStutce = true;
+            this.topStr = `您的贷款已经审核通过，完成支付即可提现`;
+          }
+          else if(openRes.data.newestLoanOrder.orderStatus === '1'){
+            // 待提现
+            this.topStutce = true;
+            this.topStr = `您的贷款成功放款，请提现到您的银行卡`;
+          }
+          else{
+            this.topStutce = false;
+            this.topStr = '您的额度已经提现成功，去查看您的银行卡'
+          }
+        }
+      }
+      else {
+        this.canClick = false;
+        //0：准入校验通过；800201：用户未实名；800202：不在白名单内；800203：未授信AMFT产品；800204：您的可用额度不足
+        let str = '暂不满足条件';
+        if(openRes.code === 'sc800201'){
+          // str = "用户未实名";
+          // this.goLink({
+          //   path:'baseinfo',
+          //   query:{
+          //     rtUrl: '/home'
+          //   }
+          // });
+          this.$nativeBridge.jumpNative('billToCredit');
+          return false;
+        } else if(openRes.code === 'sc800203' || (openRes.code === 'sc800202' && !openRes.data.isCreditedAMFT)){
+          this.$nativeBridge.jumpNative('billToCredit');
+          return false;
+        } else if(openRes.code === 'sc800202'){
+          str = "不在白名单内";
+          if(openRes.data.isCreditedAMFT){
+            window.location.href = openRes.data.thridH5URL;
+          }
+          return false;
+        } else if(openRes.code === 'sc800204'){
+          str = "您的可用额度不足";
+        }
+        this.$messagebox.alert(str,'');
+      }
+    },
+    async goToLoan(){
+      // 去借钱
+      // 判断运营商授权 + 聚有财开户
+      if(!this.canClick){
+        this.$messagebox.alert('暂不满足条件','');
+        return false;
+      }
+      let params = {
+        userId: this.userId,
+        operatorCreditNotifyUrl: window.location.origin + '/custom-page/jyc-xjd/#/home',
+        openNotifyUrl: window.location.origin + '/custom-page/jyc-xjd/#/home',
+        personId: this.personId,
+        product: 'AMFT',
+        channel: 'H5',
+        urlSource: 'AYQ_XJFQ',
+      }
+      const res = await this.$api.userRFEResultHttp(params);
+      if(res.code === 'sc0'){
+        // this.maxLimitLoanAmt = res.data.maxLimitLoanAmt;
+        if(res.data.openStatus === '-1'){
+          // 未授信，去授信 ----- 爱满分2授信 AMFT授信
+          this.$nativeBridge.jumpNative('billToCredit');
+          return false;
+        }
+        if(res.data.maxLimitLoanAmt){
+          this.set_txUsableLimit(res.data.maxLimitLoanAmt/100);
+        }
+        if(res.data.openStatus !== '1' || res.data.operatorCreditUrl){
+          // 未开户或未授权
+          this.goLink('./open-msg');
+        }
+        // else if(res.data.creditResult === "P" || res.data.creditResult === "U"){
+        else{
+          // 初审通过
+          this.goLink('./loan');
+        }
+        // else if(res.data.creditResult === "J"){
+        //   // 初审拒绝
+        //   this.$toast("暂不满足条件");
+        // }
+      }
+      else{
+        this.$toast(res.message);
+      }
+    },
+    goLink(url) {
+      // 跳转页面
+      this.$router.push(url);
+    },
+
+  },
+  beforeDestroy() {
+  }
+}
+</script>
+<style lang="scss">
+</style>
+<style lang="scss" scoped>// scoped
+.jyc-xjd{
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  background: #fff;
+  .header{
+    height: 0.6rem;
+    line-height: 0.6rem;
+    flex-shrink: 0;
+    background: #FFF8ED;
+    padding: 0 0.3rem;
+    color: #D1A056;
+    font-size: 0.24rem;
+    .link{
+      float:right;
+    }
+  }
+  .content-main{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 0 0.3rem;
+    p{
+      text-align: center;
+    }
+    .p1{
+      padding-top: 1.19rem;
+      color: #363636;
+      font-size: 0.32rem;
+    }
+    .p2{
+      font-size: 0.28rem;
+      color: #A8A8A8;
+      line-height: 0.5rem;
+    }
+    .p3{
+      font-size: 1.2rem;
+      color: #363636;
+      line-height: 1.2rem;
+      font-weight: 500;
+      margin: 0.68rem 0;
+    }
+    .p4{
+      font-size: 0.28rem;
+      color: #A8A8A8;
+    }
+    .bnt1{
+      width: 100%;
+      height: 0.92rem;
+      // border: 1px solid #D09E54;
+      // background: #D09E54;
+      background:linear-gradient(270deg,rgba(208,158,84,1) 0%,rgba(225,188,120,1) 100%);
+      line-height: 0.91rem;
+      color: #fff;
+      font-size: 0.36rem;
+      border-radius: 0.15rem;
+      margin-top: 1.39rem;
+      // margin: 1.39rem 0;
+    }
+    .bnt2{
+      width: 100%;
+      height: 0.92rem;
+      border: 1px solid #D09E54;
+      background: #fff;
+      line-height: 0.91rem;
+      color: #D09E54;
+      font-size: 0.36rem;
+      border-radius: 0.15rem;
+      margin-top: 0.4rem;
+      margin-bottom: 1.39rem;
+    }
+  }
+  .footer{
+    text-align: center;
+    flex-shrink: 0;
+    height: 0.98rem;
+    line-height: 0.98rem;
+    .sp{
+      color: #D1A056;
+      margin: 0 0.1rem;
+      font-size: 0.24rem;
+    }
+  }
+}
+</style>
+
+

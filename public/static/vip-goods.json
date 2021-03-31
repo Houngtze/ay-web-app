@@ -1,0 +1,47 @@
+{
+  "data": [
+    {
+	  "img": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/14/202010140940131366.jpg",
+      "name": "智能扫地机器人",
+      "price": 199,
+      "band": "年卡专属",
+      "code": "HD008"
+    },
+    {
+      "img": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/14/202010140943460624.jpg",
+      "name": "韩版情侣手表",
+      "price": 79,
+      "code": "HD009"
+    },
+    {
+      "img": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/14/202010140946024904.jpg",
+      "name": "便携充电式榨汁机",
+      "price": 59,
+      "code": "HD010"
+    },
+    {
+      "img": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/14/202010140946455027.jpg",
+      "name": "潮流女士手表",
+      "price": 68,
+      "code": "HD011"
+    },
+    {
+      "img": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/14/202010140947028835.jpg",
+      "name": "卡通无线蓝牙音箱",
+      "price": 65,
+      "code": "HD012"
+    },
+    {
+      "img": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/14/202010140947147771.jpg",
+      "name": "头戴式蓝牙耳机",
+      "price": 63,
+      "code": "HD013"
+    },
+    {
+      "img": "https://oss-prod-fastdfs.szqk-tech.com/2020/10/14/202010140947334288.jpg",
+      "name": "无线时钟蓝牙音箱",
+      "price": 59,
+      "code": "HD014"
+    }
+  ]
+}
